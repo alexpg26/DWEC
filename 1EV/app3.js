@@ -18,7 +18,7 @@ const string="20 años";
 console.log(isNaN(string));
 console.log(isNaN(numberstring));
 console.log(isNaN(division));   //da falso porque es un número, aunque sea infinito
-console.log(isNaN("12"));       //esto, para javaScript, es un número y un script, ambas
+console.log(isNaN("12"));       //esto, para javaScript, es un número y un string, ambas
 console.log(isNaN(12));
 console.log(isNaN(string)); //en cuanto haya letras, ya no es un número, y da true
 console.log(isNaN(NaN));
