@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+        function ImprimirDatos(){
+            document.write("<br>Marca: "+this.marca);
+            document.write("<br>Modelo: "+this.modelo);
+            document.write("<br>Año: "+this.anno);
+        }
+
+
+        function coche(marca_in, modelo_in, anno_in){
+            this.marca=marca_in;
+            this.modelo=modelo_in;
+            this.anno=anno_in;
+            this.imprimeDatos=ImprimirDatos;
+        }
+
+        let coches = new Array(4);
+        coches[0] = new coche("Ferrari","Scaglietti","2010");
+        coches[1] = new coche("BMW","24","1999");
+        coches[2] = new coche("Seat","Toledo","1999");
+        coches[3] = new coche("Fiat","500","1995");
+
+        for(i=0; i<coches.length; i++){
+            document.write("<b>Marca</b>: "+coches[i].marca);
+            document.write("<b>Modelo</b>: "+coches[i].modelo);
+            document.write("<b>Año</b>: "+coches[i].anno);
+
+        }
+
+        let nuevo_coche = new coche("Seat", "Ibiza", "1998");
+        nuevo_coche.imprimeDatos();
+    </script>
+
+</body>
+</html>

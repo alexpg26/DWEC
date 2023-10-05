@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        let premios = new Array("Coche", "1000 euros", "Manual Javascript");
+        let ultimo_premio = premios.pop();      //Extrae el ultimo valor del array y lo mete en otra variable, si no lo meto en otra variable el valor se pierde
+        document.write("El ultimo premio es "+ ultimo_premio+"<br>");
+        document.write("Quedan los siguientes premios: "+premios);
+        console.log(premios.length);            //Solo hay dos premios porque el ultimo lo extrajo el pop
+    </script>
+
+</body>
+</html>

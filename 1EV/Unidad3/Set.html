@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+        const miSet = new Set([34,"dk",true,""]);   //Bo se pueden repetir datos
+
+        const miSet1 = new Set();   //Forma más elegante
+        miSet1.add(1);
+        miSet1.add(5);
+        miSet1.add(5);
+        miSet1.add(7);
+        miSet1.add("Rico rico");
+        const objeto={a:"hola",b:12};
+        miSet1.add(objeto);
+        miSet1.add({a:"texto", b:28})
+
+        miSet1.has(1);
+        miSet1.has(Math.sqrt(25));
+        miSet1.has(objeto);
+
+        miSet1.size;        //El tamaño del set
+        miSet1.delete(5);   //Borramos el elemento que contiene el 5
+        miSet1.delete(objeto);  //Me borraría el objeto
+
+        console.log(miSet1);    //Esto nos saca que el set1 tiene 1, 5, 7 y rico rico, es decir, el 5 repetido no lo mete
+                                //Tambien nos añade el objeto
+        
+        console.log(miSet1.has(1)); //nos devuelve true porque hay un 1 en el set
+        console.log(miSet1.has(Math.sqrt(25)));     //Nos devuelve false porque la raiz cuadrada de 25 no esta en el set (5)
+        console.log(miSet1.has(objeto));            //Nos devuelve false porque el objeto lo borramos
+
+
+        //Iterar sobre conjunto (set)
+
+        for(let item of miSet1){
+            console.log(item);
+        }
+        for(let item of miSet1.values()){
+            console.log(item);
+        }
+        const miArray = Array.from(miSet1);
+        console.log(miArray);
+
+        miSet1.add(document.body);
+        miSet1.has(document.querySelector('body'));
+    </script>
+
+</body>
+</html>

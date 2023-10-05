@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splice</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+    let coches = new Array("Ferrari", "BMW", "Dacia");  //Ferrari es la posicion 0, BMW es la 1 y Dacia es la 2
+    coches.splice(2, 1, "Audi");        //Quita desde la posicion 2, hasta la 1, sin quitar la 1
+    document.write(coches);
+        let peces = new Array("Angel", "Payaso", "Trompeta", "Mariposa");
+        let removed = peces.splice(0,2,"papagayo", "anemona", "azul");
+        document.write(peces);
+
+    </script>
+
+</body>
+</html>
