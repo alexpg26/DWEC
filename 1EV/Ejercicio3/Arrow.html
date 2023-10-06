@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+    const f2 = (lista) => {     //Aquí declaramos la arrow function
+    
+        let contador=0;             
+        lista.forEach(elemento =>{      //Aquí iniciamos el bucle forEach
+            contador += elemento;
+        })
+        return contador;
+    }
+
+    const a1=new Array(23,23,23,253,43,54);
+    console.log("La suma es de "+f2(a1));
+    </script>
+
+</body>
+</html>
