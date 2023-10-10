@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-aleatorio</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+        //Ejercicio 1
+
+        //Declaramos la función flecha numeroaleatorio y le pasamos como parametro maxnum
+        const numeroaleatorio = (maxnum) => {       
+
+            //Creamos una variable resultado dentro de la funcion para guardar el numero aleatorio
+            const resultado = Math.floor(Math.random() * (maxnum+1));
+            //Retornamos el resultado, esto es lo que nos devuelve la función cuando le pasamos un parametro
+            return resultado;
+        }
+
+        //Repito la variable resultado ya que el otro resultado existia solo dentro de esa funcion, asi que la creo de nuevo
+        //para poder sacar el resultado por pantalla
+        const resultado = numeroaleatorio(10);      
+        console.log("El número aleatorio es: " + resultado);
+
+
+        //Ejercicio 2
+
+        //Aquí inicializamos el array loteria con 10 elementos que tendrá de tamaño
+        let loteria = new Array(10);
+        /*  
+        Este es un método para inicializarlo si no usaramos el for de abajo, pero es mas rapido con un for
+
+        loteria[0] = numeroaleatorio(100);
+        loteria[1] = numeroaleatorio(100);
+        loteria[2] = numeroaleatorio(100);
+        loteria[3] = numeroaleatorio(100);
+        loteria[4] = numeroaleatorio(100);
+        loteria[5] = numeroaleatorio(100);
+        loteria[6] = numeroaleatorio(100);
+        loteria[7] = numeroaleatorio(100);
+        loteria[8] = numeroaleatorio(100);
+        loteria[9] = numeroaleatorio(100);
+        */
+        
+        //Aquí iniciamos un bucle for para que coja la funcion numeroaleatorio siempre que i sea igual a la
+        //posición del array; i=0, i=1, i=2... 
+        for(let i=0; i<10; i++){
+            loteria[i] = numeroaleatorio(100);
+        }
+
+        //Aquí hacemos un forEach para que, para cada posición del array, imprima por consola el índice y el elemento
+        //el elemento va primero, es el número asignado o el valor, y el índice es la posición del array
+        loteria.forEach(function(elemento,índice){
+            console.log("El premio de lotería número " + (índice+1) + " ha sido el: " + elemento);
+        })
+
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+        //Ejercicio 1
+
+        //Creamos la clase persona y su constructor con los atributos de la clase
+        class Persona{
+            constructor (nombre, apellidos, poblacion, edad, estudios, carnet_de_conducir){
+
+                //Aquí hacemos un if para verificar que el tipo es el correcto
+                //Si no lo son, salta un error por consola
+                if (
+                    typeof nombre !== 'string' ||
+                    typeof apellidos !== 'string' ||
+                    typeof poblacion !== 'string' ||
+                    typeof edad !== 'number' ||
+                    typeof estudios !== 'string' ||
+                    typeof carnet_de_conducir !== 'boolean'
+                ) {
+                    alert("¡Error: Los tipos de argumentos no son válidos!");
+                    return;
+                }
+
+                //Atributos públicos ( no hace falta crear getters ni setters porque es público)
+                this.nombre = nombre;
+                this.apellidos = apellidos; 
+                this.poblacion = poblacion;
+                this.carnet_de_conducir = carnet_de_conducir;
+
+                //Atributos privados
+                this._edad = edad;
+                this._estudios = estudios;
+
+            }
+
+            //Aquí empezamos los getter y setter para los atributos privados
+            get edad(){
+                return this._edad;
+            }
+
+            get estudios(){
+                return this._estudios;
+            }
+
+            setEdad(nuevaEdad) {
+                this._edad = nuevaEdad;
+            }
+            setEstudios(nuevosEstudios) {
+                this._estudios = nuevosEstudios;
+            }
+        }
+
+        //Aquí creamos la instancia de la clase persona
+        const Persona1 = new Persona("Alejandro", "Peñaranda Garrido", "Illescas", 20, "Desarrollador Web", true);
+
+        //console.log(Persona1); --> Para verificar que esta todo correctamente y probar la alerta
+
+        //Ejercicio 2
+
+        const Persona2 = new Persona("Dulce", "Lorca Perea", "Numancia", 21, "Auxiliar de Enfermería", true);
+        const Persona3 = new Persona("Bruno", "Etzequiel González", "Villaseca", 23, "Desarrollador Web", false);
+
+
+        const ArrayPersonas = new Array ();
+        ArrayPersonas[0] = Persona1;
+        ArrayPersonas[1] = Persona2;
+        ArrayPersonas[2] = Persona3;
+
+        
+
+
+
+
+    </script>
+
+</body>
+</html>
