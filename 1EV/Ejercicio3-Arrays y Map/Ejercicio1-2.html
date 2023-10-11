@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 <body>
     
+
+    <div id="tabla-container" class="table table-dark table-striped"></div>
     <script type="text/javascript">
 
         //Ejercicio 1
@@ -65,19 +69,75 @@
 
         //Ejercicio 2
 
+        //Vamos a crear otros dos objetos persona más 
         const Persona2 = new Persona("Dulce", "Lorca Perea", "Numancia", 21, "Auxiliar de Enfermería", true);
         const Persona3 = new Persona("Bruno", "Etzequiel González", "Villaseca", 23, "Desarrollador Web", false);
 
 
+        //Creamos un array vacío y le metemos los objetos persona ya creados
         const ArrayPersonas = new Array ();
         ArrayPersonas[0] = Persona1;
         ArrayPersonas[1] = Persona2;
         ArrayPersonas[2] = Persona3;
 
-        
+        //Ahora, vamos a crear una tablaPersonas que tenga como parámetro personas
+        const tablaPersonas = (personas) => {
 
+            //Creamos una variable tabla y la creamos en el documento
+            const tabla = document.createElement("table");
 
+            //Introducimos el HTML normal del documento para crear una tabla
+            tabla.innerHTML = `
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Poblacion</th>
+                <th>Edad</th>
+                <th>Estudios</th>
+                <th>Carnet de Conducir</th>
+            </tr>
+        `;
 
+        //Dentro de la función, hacemos un forEach para recorrer el parámetro personas, es decir
+        //para recorrer el array de objetos
+        personas.forEach(function(elemento){
+            
+            //Creamos una variable fila y la creamos en el documento 
+            const fila = document.createElement("tr");
+
+            //Introducimos el HTML de la fila para obtener los atributos de la clase del array, pero poniendo
+            //elemento, que es el parámetro del forEach
+            fila.innerHTML = `
+                <td>${elemento.nombre}</td>
+                <td>${elemento.apellidos}</td>
+                <td>${elemento.poblacion}</td>
+                <td>${elemento.edad}</td>
+                <td>${elemento.estudios}</td>
+                <td>${elemento.carnet_de_conducir}</td>
+            `;
+            
+            //Especificamos que la fila creada en el bucle se añada a la tabla creada
+            tabla.appendChild(fila);
+        })
+
+        //Retornamos la tabla creada
+        return tabla;
+        }
+
+    //Aquí, ya fuera de la función, ordenamos el array por nombre, comparando dos elementos del array
+    ArrayPersonas.sort(function(a, b) {
+
+        if (a.nombre < b.nombre) {
+            return -1;
+        }
+        if (a.nombre > b.nombre) {
+            return 1;
+        }return 0; 
+        });
+
+        const tablaContainer = document.getElementById("tabla-container");
+
+        tablaContainer.appendChild(tablaPersonas(ArrayPersonas));
 
     </script>
 

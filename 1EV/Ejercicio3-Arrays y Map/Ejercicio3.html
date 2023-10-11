@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+
+        //Creamos la clase Persona con su constructor y todos los atributos de clase
+        class Persona{
+            constructor (dni, nombre, apellidos, poblacion, edad, estudios){
+
+                if(
+                    typeof dni !== 'string' ||
+                    typeof nombre !== 'string' ||
+                    typeof apellidos !== 'string' ||
+                    typeof poblacion !== 'string' ||
+                    typeof edad !== 'number' ||
+                    typeof estudios !== 'string'
+
+                ) {
+                    alert("¡Error: Los tipos de argumentos no son válidos!");
+                    return;
+                }
+            }
+        }
+
+    </script>
+
+</body>
+</html>
