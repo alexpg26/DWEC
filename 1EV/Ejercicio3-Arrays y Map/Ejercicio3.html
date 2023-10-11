@@ -13,6 +13,7 @@
         class Persona{
             constructor (dni, nombre, apellidos, poblacion, edad, estudios){
 
+                //Hacemos un if para comprobar que el tipo de dato introducido en las instancias es correcto
                 if(
                     typeof dni !== 'string' ||
                     typeof nombre !== 'string' ||
@@ -22,9 +23,12 @@
                     typeof estudios !== 'string'
 
                 ) {
+                    //Mandamos una alerta si el tipo de dato introducido no es correcto
                     alert("¡Error: Los tipos de argumentos no son válidos!");
                     return;
                 }
+
+                
             }
         }
 
