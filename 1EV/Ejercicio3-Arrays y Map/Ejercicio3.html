@@ -28,10 +28,101 @@
                     return;
                 }
 
-                
+                //Atributos públicos
+                this.nombre = nombre;
+                this.apellidos = apellidos; 
+                this.poblacion = poblacion;
+
+                //Atributos privados
+                this._edad = edad;
+                this._estudios = estudios;
+                this._dni = dni;
+            }
+
+            //Getter y setter para atributos privados
+
+            get edad(){
+                return this._edad;
+            }
+            get estudios(){
+                return this._estudios;
+            }
+            get dni(){
+                return this._dni;
+            }
+
+            setEdad(nuevaEdad){
+                this._edad = nuevaEdad;
+            }
+            setEstudios(nuevosEstudios){
+                this._estudios = nuevosEstudios;
+            }
+            setDni(nuevoDni){
+                this._dni = nuevoDni;
             }
         }
 
+        //Creamos varias instancias de la clase persona
+        const Persona1 = new Persona("56256234-R", "Alejandro", "Peñaranda Garrido", "Illescas", 20, "Desarrollador Web");
+        const Persona2 = new Persona("23454643-J", "Dulce", "Lorca Perea", "Numancia", 21, "Auxiliar de Enfermería");
+        const Persona3 = new Persona("89123221-Y", "Bruno", "Etzequiel González", "Villaseca", 24, "Desarrollador Web");
+
+        //Creamos un array vacío y le metemos las instancias al array
+        const ArrayPersonas = new Array ();
+        ArrayPersonas [0] = Persona1;
+        ArrayPersonas [1] = Persona2;
+        ArrayPersonas [2] = Persona3;
+
+        //Creamos el map 
+        const personasMap = new Map();
+
+        //Ahora agregamos las instancias de persona al map
+        personasMap.set(Persona1.dni, Persona1);
+        personasMap.set(Persona2.dni, Persona2);
+        personasMap.set(Persona3.dni, Persona3);
+
+        //Ahora ordenamos el mapa por clave DNI
+        const personasMapOrdenado = new Map([...personasMap.entries()].sort());
+
+        //Vemos el mapa en la consola
+        console.log(personasMapOrdenado);
+
+
+        // Creamos el body del documento
+        const body = document.body;
+
+        // Creamos la tabla y además le agregamos estilos
+        const tabla = document.createElement("table");
+        tabla.classList.add("table", "table-dark", "table-striped");
+
+        // Creamos una fila 
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Población</th>
+            <th>Edad</th>
+            <th>Estudios</th>
+        `;
+        tabla.appendChild(fila);
+
+        // Creamos un bucle ForEach para iterar y meter en las filas los datos del map
+        personasMapOrdenado.forEach((persona, dni) => {
+            const fila = document.createElement("tr");
+            fila.innerHTML = `
+                <td>${dni}</td>
+                <td>${persona.nombre}</td>
+                <td>${persona.apellidos}</td>
+                <td>${persona.poblacion}</td>
+                <td>${persona.edad}</td>
+                <td>${persona.estudios}</td>
+            `;
+            tabla.appendChild(fila);
+        });
+
+        // Agregamos la tabla al documento y el body como un hijo de la misma
+        body.appendChild(tabla);
     </script>
 
 </body>
