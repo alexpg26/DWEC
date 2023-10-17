@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+</head>
+<body>
+    
+    <button onmouseover="alert('Has pasado por encima del botón')">Pasa por encima</button>
+
+    <button id="btn1">Púlsame</button>
+    <button id="btn2">Entra y sal</button>
+    <button id="btn3">Ponte encima</button>
+    <button id="btn4">Coordenadas</button>
+
+    <label for="x">X:</label>
+    <input id="x" name="x" type="text">
+
+    <label for="y">Y:</label>
+    <input id="y" name="y" type="text">
+
+    <script>
+
+        //Creamos una variable y la asignamos el botón que hemos creado en el HTML
+        //Como son id's, tenemos que poner los hasthag "#"
+        const btn1=document.querySelector("#btn1");
+        const btn2=document.querySelector("#btn2");
+        const btn3=document.querySelector("#btn3");
+        const btn4=document.querySelector("#btn4");
+
+        const inputx = document.querySelector("#x");
+        const inputy = document.querySelector("#y");
+
+        //Método recomendado -> En el examen solo me vale éste método
+
+        //Cuando hagamos click en el boton 1, se producirá la función anónima
+        btn1.addEventListener("click", function(evento){
+
+            console.log(evento);
+            alert("Has pulsado el botón");
+
+        });
+
+        //Cuando entremos con el ratón al botón y salgamos, al salir, se ejecutará la función
+        btn2.addEventListener("mouseout", function(evento){
+
+            console.log(evento);
+            alert("Te has marchado del botón");
+
+        });
+
+        //Métodos más antiguos
+
+        //Cuando pasamos el ratón por encima, hace la función
+        btn3.onmouseover=function(evento){
+
+            console.log(evento);
+            alert("Te has puesto encima del botón");
+        }
+
+        //Método PRO
+
+        //Cuando hacemos click en el botón, se realiza la arrow function 
+        btn4.addEventListener("click",evento=>{
+            
+            console.log(evento);
+            //Sacamos por consola las coordenadas de dónde hemos pulsado
+            console.log(`X:${evento.pageX}, Y:${evento.pageY}`);
+
+            //Le damos a los valores inputx e inputy las coordenadas elegidas
+            inputx.value=evento.pageX;
+            inputy.value=evento.pageY;
+        });
+
+        //Ejercicio clase: Hacer que en las coordenadas aparezca la ubicación de mi mouse al arrastrar por la página
+
+        //Ponemos document en vez del botón porque queremos que sea a lo largo de todo el documento
+        //Ponemos "mousemove" como ya que ese es el evento que debemos escuchar para que funcione, si ponemos
+        //mouseover solo nos dara la coordenada de la primera posición que tenía nuestro ratón en el documento
+        document.addEventListener("mousemove",evento=>{
+            
+            console.log(evento);
+            //Sacamos por consola las coordenadas de dónde hemos pulsado
+            console.log(`X:${evento.pageX}, Y:${evento.pageY}`);
+
+            //Le damos a los valores inputx e inputy las coordenadas elegidas
+            inputx.value=evento.pageX;
+            inputy.value=evento.pageY;
+        });
+        
+
+    </script>
+
+</body>
+</html>

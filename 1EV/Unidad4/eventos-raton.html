@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Ratón</title>
+</head>
+
+<body>
+
+    <div class="parrafo">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas eveniet asperiores quaerat dolores corrupti,
+        ipsa placeat perspiciatis eos delectus nulla, aspernatur suscipit mollitia voluptatem iusto iste vel beatae
+        consectetur eum?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos dignissimos itaque earum hic
+        minima! Fugit delectus labore recusandae, necessitatibus voluptas quos minus veritatis alias quibusdam earum
+        autem facere commodi beatae.
+    </div>
+    <div class="parrafo">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas eveniet asperiores quaerat dolores corrupti,
+        ipsa placeat perspiciatis eos delectus nulla, aspernatur suscipit mollitia voluptatem iusto iste vel beatae
+        consectetur eum?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos dignissimos itaque earum hic
+        minima! Fugit delectus labore recusandae, necessitatibus voluptas quos minus veritatis alias quibusdam earum
+        autem facere commodi beatae.
+    </div>    
+    <div class="parrafo">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas eveniet asperiores quaerat dolores corrupti,
+        ipsa placeat perspiciatis eos delectus nulla, aspernatur suscipit mollitia voluptatem iusto iste vel beatae
+        consectetur eum?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos dignissimos itaque earum hic
+        minima! Fugit delectus labore recusandae, necessitatibus voluptas quos minus veritatis alias quibusdam earum
+        autem facere commodi beatae.
+    </div>    
+    <div class="parrafo">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas eveniet asperiores quaerat dolores corrupti,
+        ipsa placeat perspiciatis eos delectus nulla, aspernatur suscipit mollitia voluptatem iusto iste vel beatae
+        consectetur eum?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos dignissimos itaque earum hic
+        minima! Fugit delectus labore recusandae, necessitatibus voluptas quos minus veritatis alias quibusdam earum
+        autem facere commodi beatae.
+    </div>    
+    <div class="parrafo">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas eveniet asperiores quaerat dolores corrupti,
+        ipsa placeat perspiciatis eos delectus nulla, aspernatur suscipit mollitia voluptatem iusto iste vel beatae
+        consectetur eum?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos dignissimos itaque earum hic
+        minima! Fugit delectus labore recusandae, necessitatibus voluptas quos minus veritatis alias quibusdam earum
+        autem facere commodi beatae.
+    </div>
+    <script>
+
+        //Asignamos el manejador de eventos a varios elementos del DOM, los de clase parrafo
+        const divs = document.querySelectorAll(".parrafo");
+
+        //Hacemos una arrow function cuyo parametro es max
+        const aleatorio = max => {
+            return Math.round(Math.random()*max);
+        }
+
+        //Hacemos otra arrow function para cambiar el color, pasandole el parámetro e
+        const cambiaColor = e => {
+
+            //Creamos un nuevo array al que metemos la función aleatorio, pasandole como parametro un maximo de 255 colores
+            const color = new Array(aleatorio(255),aleatorio(255),aleatorio(255));
+            e.target.style.backgroundColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+
+        }
+        //Sacamos el forEach fuera de la función cambiaColor para que pueda funcionar
+        divs.forEach(div =>{
+                div.addEventListener("mouseover", cambiaColor);
+            });
+    </script>
+
+</body>
+
+</html>

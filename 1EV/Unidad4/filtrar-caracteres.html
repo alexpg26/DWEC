@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtrar-Caracteres</title>
+</head>
+<body>
+    
+    <form action="">
+        <h2>Filtrar entrada de texto y pasar a mayúsculas</h2>
+        <div class="form-group">
+            <label for="dni">DNI</label>
+            <input type="text" name="dni" id="dni" autofocus>
+        </div>
+        <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="text" name="telefono" id="telefono" autofocus>
+        </div>
+    </form>
+    <script>
+        function filtrarNum(string){
+            let out='';
+            //En este filtro, a diferencia del de abajo, solo debemos poner numeros ya que ningun telefono
+            //contiene letras, por lo tanto, si se intentan poner letras, el filtro lo deniega
+            const filtro = '1234567890';
+            for (var i=0; i<string.length; i++){
+                if(filtro.indexOf(string.charAt(i))!=-1){
+                    out+=string.charAt(i);
+                }
+            }
+            return out;
+        }
+
+        function filtrarAlfaNumericos(string){
+            let out='';
+            //En el filtro debemos poner todo lo que queremos que se pueda escribir en el DNI
+            //y como el DNI tiene letras y numeros, metemos letras (en minusculas y mayusculas)
+            //y tambien numeros, porque el dni contiene numeros
+            const filtro = 'qwertyuiopasdfghjklñzxcvbnmQWERTYUIOPASDFGHJKLÑZXCVBNM1234567890';
+            for (var i=0; i<string.length; i++){
+                if(filtro.indexOf(string.charAt(i))!=-1){
+                    out+=string.charAt(i);
+                }
+            }
+            return out;
+        }
+
+        document.querySelector("#telefono").addEventListener("keyup", function(evento){
+            console.log(this);
+            this.value=filtrarNum(this.value);
+        })
+        document.querySelector("#dni").addEventListener("keyup", function(evento){
+            console.log(this);
+            this.value=filtrarAlfaNumericos(this.value);
+
+            //Con esto, cambiamos a mayúsculas todas las letras que escriban en el DNI, ya que el DNI
+            //tiene las letras mayúsculas
+            this.value=this.value.toUpperCase();
+        })
+    </script>
+
+</body>
+</html>
