@@ -1,0 +1,141 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>DOM b�sico y atributos XHTML</title>
+
+    </script>
+</head>
+
+<body>
+    <p id="contenidos_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim vitae orci. Phasellus
+        libero. Maecenas nisl arcu, consequat congue, commodo nec, commodo ultricies, turpis. Quisque sapien nunc,
+        posuere vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae, ultrices
+        porttitor, pede. Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis,
+        faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at
+        posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.</p>
+    <a id="enlace_1" href="#">Ocultar contenidos</a>
+    <br />
+    <p id="contenidos_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim vitae orci. Phasellus
+        libero. Maecenas nisl arcu, consequat congue, commodo nec, commodo ultricies, turpis. Quisque sapien nunc,
+        posuere vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae, ultrices
+        porttitor, pede. Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis,
+        faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at
+        posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.</p>
+    <a id="enlace_2" href="#">Ocultar contenidos</a>
+    <br />
+    <p id="contenidos_3">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed mattis enim vitae orci. Phasellus
+        libero. Maecenas nisl arcu, consequat congue, commodo nec, commodo ultricies, turpis. Quisque sapien nunc,
+        posuere vitae, rutrum et, luctus at, pede. Pellentesque massa ante, ornare id, aliquam vitae, ultrices
+        porttitor, pede. Nullam sit amet nisl elementum elit convallis malesuada. Phasellus magna sem, semper quis,
+        faucibus ut, rhoncus non, mi. Duis pellentesque, felis eu adipiscing ullamcorper, odio urna consequat arcu, at
+        posuere ante quam non dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis scelerisque.</p>
+    <a id="enlace_3" href="#">Ocultar contenidos</a>
+    <script>
+        /*  A partir de la página web proporcionada, completar el código JavaScript para que:
+ 
+ 1.   Cuando se pinche sobre el primer enlace, se oculte su sección relacionada
+ 2.   Cuando se vuelva a pinchar sobre el mismo enlace, se muestre otra vez esa sección de contenidos
+ 3.   Completar el resto de enlaces de la página para que su comportamiento sea idéntico al del primer enlace
+ 4.   Cuando una sección se oculte, debe cambiar el mensaje del enlace asociado (pista: textContent);
+ 
+  */
+
+        function muestraOculta() {
+
+        }
+
+        window.addEventListener("load", e=>{
+
+            const formulario = document.querySelector("#formulario");
+            const inputTarjeta = document.querySelector("#numTarjea");
+            const btnValidar = document.querySelector("#btn-validar");
+
+            btnValidar.addEventListener("click", e =>{
+                const valorTarjeta = inputTarjeta.value.trim();
+                const opt = document.querySelector("input[name='tipocard']:checked").value;
+
+                if(!ValidarTarjeta(valorTarjeta, opt)){
+                    inputTarjeta.setCustomValidity("Error en el número de la tarjeta");
+                    console.log("Error en la tarjeta tipo " + opt);
+                } else{
+                    inputTarjeta.setCustomValidity("");
+                    console.log("Tarjeta válida tipo " + opt);
+                }
+                formulario.classList.add("was-validated");
+            });
+
+            inputTarjeta.addEventListener("keyup", e =>{
+                const valorTarjeta = inputTarjeta.value.trim();
+                const opt = document.querySelector("input[name='tipocard']:checked").value;
+
+                if(e.keyCode === 13){
+                    e.preventDefault();
+                }
+
+                if(!ValidarTarjeta(valorTarjeta, opt)){
+                    inputTarjeta.setCustomValidity("Error en el número de la tarjeta");
+                    console.log("Error en la tarjeta tipo " + opt);
+                }else{
+                    inputTarjeta.setCustomValidity("");
+                    console.log("Tarjeta válida tipo " + opt);
+                }
+                formulario.classList.add("was-validated");
+            });
+
+            function validarTarjeta(codigo, opt){
+                var msg = "Valor incorrecto";
+                VISA = /^4[0-9]{3}-?[0-9]{4}-?[0-9]{4}-?[0-9]{4}$/;
+                MASTERCARD = /^5[1-5][0-9]{2}-?{0-9}{4}-?{0-9}{4}-?{0-9}{4}$/;
+                AMEX = /^3[47][0-9-]{16}$/;
+                CABAL = /^(6842|402917|402918|527571|527572|0377798|0377799)[0-9]*$/;
+                NARANJA = /^(6842|472917|472918|577571|577572|0777798|0277799)[0-9]*$/;
+            }
+
+            if(luhn(codigo)) {
+                if (opt == "VISA" && !codigo.match(VISA)) {
+                    console.log("Formato incorrecto de VISA");
+                    return false;
+                }
+                if (opt == "MASTERCARD" && !codigo.match(MASTERCARD)) {
+                    console.log("Formato incorrecto de MASTERCARD");
+                    return false;
+                }
+                if (opt == "AMEX" && !codigo.match(AMEX)) {
+                    console.log("Formato incorrecto de AMEX");
+                    return false;
+                }
+                if (opt == "CABAL" && !codigo.match(CABAL)) {
+                    console.log("Formato incorrecto de CABAL");
+                    return false;
+                }
+                if (opt == "NARANJA" && !codigo.match(NARANJA)) {
+                    console.log("Formato incorrecto de NARANJA");
+                    return false;
+                }
+                return true
+            } else {
+                console.log("Número incorrecto de tarjeta");
+                return false;
+            }
+
+            function luhn(value){
+                if (/[^0-9-\s]+/.test(value)) return false;
+
+                let nCheck = 0, bEven = false;
+
+                value = value.replace(/\D/g, "");
+                for (var n = value.length - 1; n>=0; n--){
+                    var cDigit = value.charAt(n);
+                        nDigit = parseInt(cDigit, 10);
+                    if (bEven && (nDigit *= 2) > 9) nDigit -= 9; nCheck += nDigit; bEven = !bEven;
+                }
+                return(nCheck % 10) == 0;
+            }
+        });
+    </script>
+</body>
+
+</html>
