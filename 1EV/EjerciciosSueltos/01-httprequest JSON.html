@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="01-estilos.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Ajax con XMLHttpRequest</h1>
+        <div class="contenido">
+
+        </div>
+        <button id="btn">GET!</button>
+    </div>
+
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+    const contenido = document.querySelector(".contenido");
+    const btn = document.getElementById("btn");
+
+    btn.addEventListener("click", function () {
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener("load", function () {
+            const response = this.response;
+            const decodedResponse = JSON.parse(response);
+            mostrarRespuesta(decodedResponse);
+        });
+        xhr.open("GET", "https://www.boredapi.com/api/activity");
+        xhr.send();
+    });
+
+    function mostrarRespuesta(decodedResponse) {
+        contenido.innerHTML = "";
+        const activity = document.createElement("h4");
+        activity.textContent = decodedResponse.activity;
+        contenido.appendChild(activity);
+
+        const enlace = document.createElement("h4");
+        enlace.textContent = decodedResponse.link;
+        contenido.appendChild(enlace);
+    }
+});
+        
+    </script>
+</body>
+</html>

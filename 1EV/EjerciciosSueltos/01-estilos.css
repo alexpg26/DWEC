@@ -1,0 +1,26 @@
+.contenido{
+    border:2px dotted black;
+    min-height:10em; 
+    margin-bottom: 1em;
+}
+
+.contenedor{
+    width: 50%;
+    margin: 0 auto;
+}
+
+
+
+button{
+    display:block;
+    width:100%;
+}
+
+.error{
+    border-color: red;
+}
+
+.success{
+    border-color:green;
+}
+
