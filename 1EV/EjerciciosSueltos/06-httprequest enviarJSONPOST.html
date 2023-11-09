@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="01-estilos.css">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Ajax con XMLHttpRequest</h1>
+        <div class="contenido">
+
+        </div>
+        <button id="btn">GET!</button>
+    </div>
+
+    <script>
+        const contenido = document.querySelector(".contenido");
+        const btn = document.getElementById("btn");
+
+        //Declaración de un nuevo objeto
+        const xhr = new XMLHttpRequest();
+
+        //INIY
+        //xhr.open("GET", "https://www.boredapi.com/api/activity");
+
+        xhr.addEventListener("error", function(){
+            //errores que escapan al objeto xhr
+            contenido.classList.add("error");
+        });
+
+        //asignar evento a botón
+        btn.addEventListener("click", e =>{
+            xhr.open("POST", "http://localhost/save-json.php");
+
+            const obj = {
+                nombre: "paloma",
+                apellido: "pérez"
+            }
+            xhr.send(json.stringify(obj));
+        });
+
+        /*function insertOutputResponse(response){
+            let decodeResponse = JSON.parse(response);
+            contenido.innerHTML="";
+            let activity = document.createElement("h4");
+            activity.append(decodeResponse.activity);
+            contenido.append(activity);
+
+            let enlace = document.createElement("h4");
+            enlace.append(decodeResponse.link);
+            contenido.append(enlace);
+        }*/
+        
+    </script>   
+</body>
+</html>
