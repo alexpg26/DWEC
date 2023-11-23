@@ -1,0 +1,390 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <style> 
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }   
+        ul{
+            list-style: none;
+        }   
+        .header{
+            display:flex;
+            background-color: #FFFFFF;
+            justify-content: space-between;
+        }   
+        .header-izq{
+            flex:1;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            display:flex;
+        }   
+        .header-izq img{
+            max-width: 100%;
+            max-height: 100%;
+            width:100px;
+            height: auto;
+        }       
+        .header-der{
+            flex:3;
+            display:flex;
+            background-color: rgba(15, 0, 104, 0.1);
+            font-family: "Crimson Text";
+            justify-content: center;
+            align-items: center;
+        }   
+        .header-der nav ul{
+            padding:0;
+            margin:0;
+            display:flex;
+        }   
+        .header-der nav ul li{
+            margin: 50px;
+            margin-left:100px;
+            margin-right:100px;
+        }   
+        .header-der nav ul li a{
+            text-decoration: none;
+            color: #0F0068;
+            font-size: 24px;
+        }   
+        p{
+            text-decoration: none;
+            color: #0F0068;
+            font-size: 24px;
+        }   
+        p:hover{
+            color:red;
+            cursor: pointer;
+        }   
+        .header-der nav ul li a:hover{
+            color: red;
+        }   
+        body{
+            background-color: #273B7A;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }   
+        .body{
+            text-align: center;
+        }   
+        .body h2{
+            margin-top:130px;
+            color:white;
+        }   
+        .body h3{
+            color:white;
+        }   
+        #usuarios-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }   
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            text-align: center;
+            margin: 20px;
+            background-color: white;
+        }
+        th, td {
+            border: 2px solid black;
+            padding: 8px;
+        }
+        th {
+            font-weight: bold;
+        }   
+        .post-container {
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+        }   
+    </style>
+</head>
+<body>
+
+    <!--Aquí hemos hecho un header que tenga un logo, que al pulsarlo nos redirigirá 
+        de nuevo al home del blog, y con un menú con Usuarios y Posts-->
+    <div class="header">
+        <div class="header-izq">
+            <a href="blog.html"><img src="./IMG/LogoEmpresa.png" alt=""></a>
+        </div>
+        <div class="header-der">
+            <nav>
+                <ul>
+                    <li><p id="usuarios">USUARIOS</p></li>
+                    <li><p id="posts">POSTS</p></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <!--Aquí hemos creado dos divs, uno para poder crear todos los elementos HTML más adelante de todo lo relacionado
+    con los usuarios, y otro para los posts-->
+    <div id="usuarios-container"></div>
+    <div id="posts-container"></div>
+    
+    <!--Esto es un div corriente para indicar el home de nuestro blog y el nombre del autor-->
+    <div class="body">
+        <h2>ESTA ES MI PÁGINA DE BLOG</h2>
+        <br>
+        <br>
+        <h3>ALEJANDRO PEÑARANDA GARRIDO</h3>
+    </div>
+    
+    <script>
+
+        /*Con esta función estamos cogiendo el elemento usuarios del menú, y le decimos que al darle click
+        la función haga un fetch a la API de users, pasándole la función de pintaUsuarios(data) que la defini
+        más adelante*/
+        document.getElementById("usuarios").addEventListener("click", function () {
+            fetch("https://jsonplaceholder.typicode.com/users")
+                .then(response => response.json())
+                .then(data => pintaUsuarios(data))
+                .catch(error => console.error('Error:', error));
+        });
+    
+        /*En esta función llamada pintaUsuarios, le pasamos el parámetro listausers. */
+        function pintaUsuarios(listausers) {
+            /*Estas líneas se repiten a lo largo del código para borrar todo el resto de elementos
+            de otras funciones, para que cuando recarguemos la página nunca se nos repitan los elementos
+            (por ejemplo, que nos saque los usuarios, y al ir a ver los posts, nos mantenga la lista de usuarios)*/
+            document.querySelector('.body h2').style.display = 'none';
+            let usuariosContainer = document.getElementById("usuarios-container");
+            usuariosContainer.innerHTML = '';
+            let postsContainer = document.getElementById("posts-container");
+            postsContainer.innerHTML = '';
+    
+            /*Ahora vamos a crear una tabla donde vamos a mostrar los datos que nos piden de todos los usuarios, 
+            asignándole la clase "table" para que coja los estilos css que le hemos implementado*/
+            let userTable = document.createElement("table");
+            userTable.classList.add("table"); 
+    
+            /*Aquí crearemos la fila del encabezado para la tabla; crearemos un elemento "tr" y declararemos 
+            una función para guardar un string con los títulos o encabezados. Después creamos los encabezados 
+            con el elemento "th" y se lo añadimos a la letiable filaHeader o "tr"*/
+            let filaHeader = document.createElement("tr");
+            let headers = ["#", "Username", "Email", "Posts"];
+            headers.forEach(function (header) {
+                let th = document.createElement("th");
+                th.textContent = header;
+                filaHeader.appendChild(th);
+            });
+    
+            userTable.appendChild(filaHeader);
+    
+            /*Ahora vamos a iterar sobre el parámetro que le hemos pasado "listausers" y vamos a crear filas para
+            la tabla, rellenándola con los datos que requiramos*/
+            listausers.forEach(function (user) {
+                //Aquí creamos la letiable para las filas de la tabla
+                let filaUser = document.createElement("tr");
+    
+                /*Aquí empezamos a crear las celdas de las filas que queremos sacar por pantalla. Las he separado
+                en cada uno de los headers que definimos antes. En cada uno de ellos declaramos una letiable
+                a la que le asignamos el elemento HTML "td" e imprimimos los datos de la API*/
+                let userId = document.createElement("td");
+                userId.textContent = user.id;
+                
+                /*Esta celda será la celda del link a una página que muestra los detalles de cada usuario
+                (más datos del usuario que no se muestran de primeras al clicar en usurios). Simplemente hemos 
+                añadido una ruta, con el "#", y hemos almacenado el user.id como un "data-id", además de llamar a 
+                la función pintaUsuario al que le pasamos como atributo el user.id */
+                let nameUser = document.createElement("td");
+                let detallesLink = document.createElement("a");
+                detallesLink.textContent = user.username;
+                detallesLink.href = "#";
+                detallesLink.setAttribute("data-id", user.id);
+                detallesLink.addEventListener("click", function () {
+                    pintaUsuario(user.id);
+                });
+                nameUser.appendChild(detallesLink);
+
+                /*Aquí simplemente hemos añadido estilos al link para mostrar detalles del usuario*/
+                detallesLink.style.textDecoration = "none";
+                detallesLink.style.color = "inherit"; 
+                detallesLink.style.cursor = "pointer"; 
+    
+                let emailUser = document.createElement("td");
+                emailUser.textContent = user.email;
+    
+                let postsUser = document.createElement("td");
+                let postsLink = document.createElement("a");
+                postsLink.textContent = "Mostrar posts";
+                postsLink.href = "#";
+                postsLink.addEventListener("click", function () {
+                    pintaPosts(userId);
+                });
+                postsLink.setAttribute("data-id", user.id);
+                
+                postsUser.appendChild(postsLink);
+    
+                /*Ahora agregamos las filas a la tabla*/
+                filaUser.appendChild(userId);
+                filaUser.appendChild(nameUser);
+                filaUser.appendChild(emailUser);
+                filaUser.appendChild(postsUser);;
+    
+                userTable.appendChild(filaUser);
+            });
+    
+            /*Finalmente, agregamos la tabla al contenedor*/
+            usuariosContainer.appendChild(userTable);
+        }
+
+        /*Esta es la función que le pasamos al link de los usuarios. Esta función nos mostrará más en detalle 
+        los datos del usuario elegido en detalle. Lo he realizado con una tabla al igual que la lista de usuarios
+        por más comodidad al repetir código.*/
+        function pintaUsuario(id) {
+            /*Al igual que antes, hemos quitado cualquier elemento que hubiera para evitar que se repitan 
+            elementos de otras funciones*/
+            document.querySelector('.body h2').style.display = 'none';
+            let usuariosContainer = document.getElementById("usuarios-container");
+            usuariosContainer.innerHTML = '';
+            let postsContainer = document.getElementById("posts-container");
+            postsContainer.innerHTML = '';
+
+            /*Hacemos un fetch para sacar los datos pero solamente del usuario que hayamos clicado, añadiendo
+            a la url el id del usuario en cuestión, que se lo pasamos al llamar a la función.
+            Aquí apenas daré explicaciones ya que es muy parecida la función anterior.*/
+            fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+                .then(response => response.json())
+                .then(usuario => {
+
+                    let userTable = document.createElement("table");
+                    userTable.classList.add("table");
+
+                    let filaHeader = document.createElement("tr");
+                    let headers = ["ID", "name", "Username", "Email", "Street", "Suite", "City", "Zipcode", "LAT", "LNG", "Phone", "Website", "Mostrar Posts"];
+
+                    headers.forEach(function (header) {
+                        let th = document.createElement("th");
+                        th.textContent = header;
+                        filaHeader.appendChild(th);
+                    });
+
+                    userTable.appendChild(filaHeader);
+
+                    let filaUser = document.createElement("tr");
+
+                    let userId = document.createElement("td");
+                    userId.textContent = usuario.id;
+
+                    let nameUser = document.createElement("td");
+                    nameUser.textContent = usuario.name;
+
+                    let Username = document.createElement("td");
+                    Username.textContent = usuario.username;
+
+                    let userEmail = document.createElement("td");
+                    userEmail.textContent = usuario.email;
+
+                    let userStreet = document.createElement("td");
+                    userStreet.textContent = usuario.address.street;
+
+                    let userSuite = document.createElement("td");
+                    userSuite.textContent = usuario.address.suite;
+
+                    let userCity = document.createElement("td");
+                    userCity.textContent = usuario.address.city;
+
+                    let userZipcode = document.createElement("td");
+                    userZipcode.textContent = usuario.address.zipcode;
+
+                    let userLat = document.createElement("td");
+                    userLat.textContent = usuario.address.geo.lat;
+
+                    let userLng = document.createElement("td");
+                    userLng.textContent = usuario.address.geo.lng;
+
+                    let userPhone = document.createElement("td");
+                    userPhone.textContent = usuario.phone;
+
+                    let userWebsite = document.createElement("td");
+                    userWebsite.textContent = usuario.website;
+
+                    let postsUser = document.createElement("td");
+                    let postsLink = document.createElement("a");
+                    postsLink.textContent = "Mostrar posts";
+                    postsLink.href = "#";
+                    postsLink.addEventListener("click", function () {
+                        pintaPosts(userId);
+                    });
+                    postsUser.appendChild(postsLink);
+
+                    filaUser.appendChild(userId);
+                    filaUser.appendChild(nameUser);
+                    filaUser.appendChild(Username);
+                    filaUser.appendChild(userEmail);
+                    filaUser.appendChild(userStreet);
+                    filaUser.appendChild(userSuite);
+                    filaUser.appendChild(userCity);
+                    filaUser.appendChild(userZipcode);
+                    filaUser.appendChild(userLat);
+                    filaUser.appendChild(userLng);
+                    filaUser.appendChild(userPhone);
+                    filaUser.appendChild(userWebsite);
+                    filaUser.appendChild(postsUser);;
+
+                    userTable.appendChild(filaUser);
+
+                    usuariosContainer.appendChild(userTable);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        
+        /*Aquí estamos cogiendo el elemento del menú con el id de "Posts" y estamos indicando que al hacer
+        click sobre él, llame al API de posts y nos muestre todos los post. Además, los sacaremos por pantalla con
+        la función pintaPosts, que definiremos más adelante.*/
+        document.getElementById("posts").addEventListener("click", function () {
+            fetch("https://jsonplaceholder.typicode.com/posts")
+                .then(response => response.json())
+                .then(data => pintaPosts(data))
+                .catch(error => console.error('Error:', error));
+        });
+
+        function pintaPosts(data) {
+            document.querySelector('.body h2').style.display = 'none';
+            let postsContainer = document.getElementById("posts-container");
+            postsContainer.innerHTML = '';
+            let usuariosContainer = document.getElementById("usuarios-container");
+            usuariosContainer.innerHTML = '';
+            postsContainer.innerHTML = "";
+
+            /*Aquí iteramos sobre los datos que estamos recogiendo de la API de posts. 
+            Para cada iteración, es decir, para cada post, vamos a crear un div nuevo con elementos h2 y p HTML, 
+            que serán el título del post y el contenido del mismo. Además, vamos a incluir un link que nos de 
+            los detalles del usuario que ha creado el post en cuestión*/
+            data.forEach(function(post) {
+                let postContainer = document.createElement("div");
+                postContainer.classList.add("post-container");
+
+                let titulo = document.createElement("h2");
+                titulo.textContent = post.title;
+
+                let body = document.createElement("h4");
+                body.textContent = post.body;
+
+                let userLink = document.createElement("a");
+                userLink.textContent = "Ver usuario";
+                userLink.href = "http://127.0.0.1:5501/1EV/Practica7.1/blog.html#" + post.userId; 
+                userLink.addEventListener("click", function() {
+                    pintaUsuario(post.userId);
+                });
+
+                /*Aquí incluimos los elementos creados al contenedor*/
+            postContainer.appendChild(titulo);
+            postContainer.appendChild(body);
+            postContainer.appendChild(userLink);
+
+            postsContainer.appendChild(postContainer);
+            });
+        }
+        
+    </script>
+    
+    </body>
+</html>
