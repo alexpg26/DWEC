@@ -7,7 +7,7 @@ let fecha_actual = new Date();
 let fecha_fincurso = new Date(2024,4,30);       //La fecha es año,mes,dia
 
 console.log(`La fecha actual es ${fecha_actual}`);       //Los literals son los ${}
-console.log(`El curso acaba en ${fecha_fincurso}`);      //Las comillas para las fechas son ``
+console.log(`El curso acaba en ${fecha_fincurso}`);      //Las comillas para los literals son ``
 let tiempo_restante=fecha_fincurso-fecha_actual;
 console.log(`El curso acaba dentro de ${tiempo_restante} en milisegundos`);     //El curso acaba dentro de 21105943672 en milisegundos
 

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio2</title>
+</head>
+<style> 
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }   
+    ul{
+        list-style: none;
+    }   
+    .header{
+        display:flex;
+        background-color: #ffffff;
+        justify-content: space-between;
+    }   
+    .header-izq{
+        flex:1;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        display:flex;
+    }   
+    .header-izq img{
+        max-width: 100%;
+        max-height: 100%;
+    }       
+    .header-der{
+        flex:3;
+        display:flex;
+        background-color: rgba(255, 255, 255);
+        font-family: "Crimson Text";
+        justify-content: center;
+        align-items: center;
+    }   
+    .header-der nav ul{
+        padding:0;
+        margin:0;
+        display:flex;
+    }   
+    .header-der nav ul li{
+        margin: 50px;
+        margin-left:100px;
+        margin-right:100px;
+    }   
+    .header-der nav ul li a{
+        text-decoration: none;
+        color: #5c95ff;
+        font-size: 24px;
+    }   
+    p{
+        text-decoration: none;
+        color: #5c95ff;
+        font-size: 24px;
+    }   
+    p:hover{
+        color:red;
+        cursor: pointer;
+    }   
+    .header-der nav ul li a:hover{
+        color: red;
+    }   
+    body{
+        background-color: #277a45;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }   
+    .body{
+        text-align: center;
+    }   
+    .body h2{
+        margin-top:130px;
+        color:white;
+    }   
+    .body h3{
+        color:white;
+    }   
+    #usuarios-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }   
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        text-align: center;
+        margin: 20px;
+        background-color: white;
+    }
+    th, td {
+        border: 2px solid black;
+        padding: 8px;
+    }
+    th {
+        font-weight: bold;
+    }   
+    .post-container {
+        background-color: white;
+        padding: 10px;
+        margin-bottom: 10px;
+    }   
+</style>
+<body>
+        <!--Aquí hemos hecho un header que tenga un logo, que al pulsarlo nos redirigirá 
+        de nuevo al home del blog, y con un menú con Usuarios y Posts-->
+        <div class="header">
+            <div class="header-izq">
+                <a href="Ejercicio2.html"><img src="./IMG/logoAzar.png" alt=""></a>
+            </div>
+            <div class="header-der">
+                <nav>
+                    <ul>
+                        <li><p id="usuarios">RELACIÓN DE LOS 5 ÚLTIMOS USUARIOS</p></li>
+                        <li><p id="posts">SACAR ESTADÍSTICA POST</p></li>
+                        <li><p id="comentarios">SACAR ESTADÍSTICA COMENTARIOS</p></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    <!--Aquí hemos creado dos divs, uno para poder crear todos los elementos HTML más adelante de todo lo relacionado
+    con los usuarios, y otro para los posts-->
+    <div id="usuarios-container"></div>
+    <div id="posts-container"></div>
+    <div id="comentarios-container"></div>
+
+    <!--Esto es un div corriente para indicar el home de nuestro blog y el nombre del autor-->
+    <div class="body">
+        <h2>ESTA ES EL SEGUNDO EJERCICIO DE LA RECUPERACIÓN</h2>
+        <br>
+        <br>
+        <h3>ALEJANDRO PEÑARANDA GARRIDO</h3>
+    </div>
+
+    <script src="Ejercicio2.js"></script>
+</body>
+</html>
